@@ -1,0 +1,1 @@
+// Sequelize db랑 연결하기
