@@ -32,6 +32,18 @@ class Chat extends Sequelize.Model {
     );
   }
   static associate(db) {
+    db.Chat.belongsToMany(db.User, {
+      through: "IncludeChat",
+      foreignKey: "chatId",
+      otherKey: "userId",
+      onDelete: "cascade",
+    });
+
+    db.Chat.hasMany(db.Message, {
+      sourceKey: "chatId",
+      foreignKey: "chatId",
+      onDelete: "cascade",
+    });
   }
 }
 

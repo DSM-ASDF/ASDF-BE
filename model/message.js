@@ -27,6 +27,14 @@ class Message extends Sequelize.Model {
           type: Sequelize.STRING(100),
           allowNull: false,
         },
+        chatId: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: "Chat",
+            key: "chatId"
+          },
+        },
       },
       {
         sequelize,
@@ -39,7 +47,13 @@ class Message extends Sequelize.Model {
       }
     );
   }
-  static associate(db) {}
+  static associate(db) {
+    db.Message.belongsTo(db.Chat, {
+      sourceKey: "chatId",
+      targetKey: "chatId",
+      onDelete: "cascade",
+    });
+  }
 }
 
 module.exports = Message;

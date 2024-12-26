@@ -28,9 +28,17 @@ class Comment extends Sequelize.Model {
           allowNull: false,
         },
         userProfile: {
-          type: Sequelize.TEXT,
+          type: Sequelize.STRING(255),
           allowNull: false,
         },
+        todoId: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: "Todo",
+            key: "todoId"
+          }
+        }
       },
       {
         sequelize,
@@ -43,7 +51,13 @@ class Comment extends Sequelize.Model {
       }
     );
   }
-  static associate(db) {}
+  static associate(db) {
+    db.Comment.belongsTo(db.Todo, {
+      sourceKey: "todoId",
+      targetKey: "todoId",
+      onDelete: "cascade"
+    })
+  }
 }
 
 module.exports = Comment

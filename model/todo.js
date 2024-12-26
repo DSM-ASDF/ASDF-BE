@@ -16,6 +16,11 @@ class Todo extends Sequelize.Model {
         },
         todoOwner: {
           type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: "User",
+            key: "userId"
+          },
         },
         todoLabel: {
           type: Sequelize.ENUM,
@@ -47,7 +52,7 @@ class Todo extends Sequelize.Model {
             "테스트",
             "배포",
           ],
-          defaultValue: "기능개발",
+          defaultValue: "",
         },
         todoPriority: {
           type: Sequelize.ENUM,
@@ -56,10 +61,12 @@ class Todo extends Sequelize.Model {
         },
         todoDetail: {
           type: Sequelize.STRING(100),
+          allowNull: false
         },
         todoProgress: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          defaultValue: 0,
         },
         todoDate: {
           type: Sequelize.DATE,
@@ -78,7 +85,13 @@ class Todo extends Sequelize.Model {
       }
     );
   }
-  static associate(db) {}
+  static associate(db) {
+    db.Todo.hasMany(db.Comment, {
+      sourceKey: "todoId",
+      foreignKey: "todoId",
+      onDelete: "cascade",
+    });
+  }
 }
 
 module.exports = Todo;

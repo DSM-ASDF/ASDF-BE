@@ -31,7 +31,6 @@ class Schedule extends Sequelize.Model {
       }
     );
   }
-  static associate(db) {}
 }
 
 module.exports = Schedule;

@@ -54,6 +54,13 @@ class user extends Sequelize.Model {
       otherKey: "teamId",
       onDelete: "cascade",
     });
+
+    db.User.belongsToMany(db.Chat, {
+      through: "IncludeChat",
+      foreignKey: "userId",
+      otherKey: "chatId",
+      onDelete: "cascade"
+    })
   }
 }
 
