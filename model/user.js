@@ -39,13 +39,28 @@ class user extends Sequelize.Model {
         sequelize,
         timestamps: false,
         underscored: false,
-        modelName: "user",
-        tableName: "USER",
+        modelName: "User",
+        tableName: "user",
         paranoid: false,
         charset: "utf8",
         collate: "utf8_general_ci",
       }
     );
+  }
+  static associate(db) {
+    db.User.belongsToMany(db.Team, {
+      through: "IncludeTeam",
+      foreignKey: "userId",
+      otherKey: "teamId",
+      onDelete: "cascade",
+    });
+
+    db.User.belongsToMany(db.Chat, {
+      through: "IncludeChat",
+      foreignKey: "userId",
+      otherKey: "chatId",
+      onDelete: "cascade"
+    })
   }
 }
 
