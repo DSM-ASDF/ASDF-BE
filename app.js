@@ -4,17 +4,17 @@ const dotenv = require("dotenv");
 const router = require("./controller/index");
 const { sequelize } = require("./model");
 
-dotenv.configDotenv();
+dotenv.config();
 
 const PORT = Number(process.env.PORT ?? 8000);
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extened: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
     origin: "*",
-    ethod: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true,
   })
 );

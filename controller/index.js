@@ -1,1 +1,6 @@
-//도메인 적는 곳
+const app = require("express")();
+const user = require("./user");
+
+app.use("/user", user);
+
+module.exports = app;
