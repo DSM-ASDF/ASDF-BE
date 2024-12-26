@@ -27,7 +27,7 @@ app.listen(PORT, async () => {
   await sequelize
     .sync({ force: false })
     .then(() => {
-      console.log(`DB has initted`);
+      console.log(`DB has init`);
     })
     .catch((err) => {
       console.error(err);
