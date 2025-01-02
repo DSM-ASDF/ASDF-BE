@@ -1,8 +1,8 @@
-const { Sequelize } = require("sequelize");
+const Sequelize = require("sequelize");
 
-class user extends Sequelize.Model {
+class User extends Sequelize.Model {
   static initiate(sequelize) {
-    user.init(
+    User.init(
       {
         userId: {
           type: Sequelize.INTEGER,
@@ -64,4 +64,4 @@ class user extends Sequelize.Model {
   }
 }
 
-module.exports = user;
+module.exports = User;
