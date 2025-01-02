@@ -19,16 +19,12 @@ class Comment extends Sequelize.Model {
           type: Sequelize.STRING(100),
           allowNull: false,
         },
-        todoId: {
-          type: Sequelize.INTEGER,
-          allowNull: false
-        },
         userName: {
           type: Sequelize.STRING(10),
           allowNull: false,
         },
         userProfile: {
-          type: Sequelize.STRING(255),
+          type: Sequelize.TEXT,
           allowNull: false,
         },
         todoId: {
@@ -53,7 +49,7 @@ class Comment extends Sequelize.Model {
   }
   static associate(db) {
     db.Comment.belongsTo(db.Todo, {
-      sourceKey: "todoId",
+      foreignKey: "todoId",
       targetKey: "todoId",
       onDelete: "cascade"
     })

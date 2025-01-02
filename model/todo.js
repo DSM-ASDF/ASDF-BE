@@ -39,7 +39,7 @@ class Todo extends Sequelize.Model {
             "PM",
             "QA",
           ],
-          defaultValue: "",
+          defaultValue: "FrontEnd",
         },
         todoWorkArea: {
           type: Sequelize.ENUM,
@@ -52,7 +52,7 @@ class Todo extends Sequelize.Model {
             "테스트",
             "배포",
           ],
-          defaultValue: "",
+          defaultValue: "기능개발",
         },
         todoPriority: {
           type: Sequelize.ENUM,
