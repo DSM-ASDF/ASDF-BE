@@ -4,3 +4,4 @@ const logic = require("../controller/invite")
 router.post("/invite", logic.inviteMember);
 router.post("/accept", logic.acceptInvite);
 router.post("/reject", logic.rejectInvite);
+router.delete("/leave/:teamId/:userId", logic.leaveTeam)

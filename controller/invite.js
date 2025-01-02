@@ -58,7 +58,6 @@ const acceptInvite = async (req, res) => {
 };
 
 const rejectInvite = async (req, res) => {
-  const { teamId, email } = req.body;
   try {
     res.status(200).send("초대가 거절되었습니다.");
   } catch (error) {
@@ -66,8 +65,36 @@ const rejectInvite = async (req, res) => {
   }
 };
 
+const leaveTeam = async (req, res) => {
+  const { teamId, userId } = req.params;
+
+  try {
+    const team = await Team.findByPk(teamId);
+    if (!team) {
+      return res.status(404).send("해당 팀을 찾을 수 없습니다.");
+    }
+
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).send("해당 사용자를 찾을 수 없습니다.");
+    }
+
+    const isMember = await team.hasUser(user);
+    if (!isMember) {
+      return res.status(400).send("사용자는 이 팀의 멤버가 아닙니다.");
+    }
+
+    await team.removeUser(user);
+
+    res.status(200).send("팀에서 성공적으로 나갔습니다.");
+  } catch (error) {
+    res.status(500).send("팀을 나가는 중 오류가 발생하였습니다.");
+  }
+};
+
 module.exports = {
   inviteMember,
   acceptInvite,
-  rejectInvite
-}
+  rejectInvite,
+  leaveTeam,
+};
