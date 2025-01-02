@@ -16,9 +16,6 @@ User.initiate(sequelize);
 const Chat = require("./chat.js");
 Chat.initiate(sequelize);
 
-const Comment = require("./comment.js");
-Comment.initiate(sequelize);
-
 const Message = require("./message.js");
 Message.initiate(sequelize);
 
@@ -31,13 +28,16 @@ Team.initiate(sequelize);
 const Todo = require("./todo.js");
 Todo.initiate(sequelize);
 
+const Comment = require("./comment.js");
+Comment.initiate(sequelize);
+
 db.sequelize = sequelize;
 db.User = User;
 db.Chat = Chat;
-db.Comment = Comment;
 db.Message = Message;
 db.Schedule = Schedule;
 db.Team = Team;
 db.Todo = Todo;
+db.Comment = Comment;
 
 module.exports = db;
