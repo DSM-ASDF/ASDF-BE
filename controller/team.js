@@ -1,31 +1,4 @@
-const Team = require("../model/team");
-const sendEmail = require("../utils/sendEmail");
-
-const inviteMember = async (req, res) => {
-  try {
-    const { email } = req.body;
-
-    const exist = User.findAll({
-      where: email,
-    });
-
-    if (exist) {
-      return res.status(409).send("이미 초대가 발송된 사용자입니다.");
-    }
-
-    const emailContent = `안녕하세요. 팀에 초대가 되었습니다.`;
-
-    await sendEmail({
-      to: email,
-      subject: "팀에 초대가 되었습니다.",
-      text: emailContent,
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ error: "팀원 초대 이메일 발송 중 오류가 발생하였습니다." });
-  }
-};
+const Team = require("../model/team")
 
 const inquiryTeam = async (req, res) => {
   try {
