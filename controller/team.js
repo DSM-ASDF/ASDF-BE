@@ -59,7 +59,6 @@ const deleteTeam = async (req, res) => {
 };
 
 module.exports = {
-  inviteMember,
   inquiryTeam,
   createTeam,
   deleteTeam,

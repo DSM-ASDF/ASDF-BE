@@ -35,7 +35,7 @@ const inviteMember = async (req, res) => {
   }
 };
 
-const accept = async (req, res) => {
+const acceptInvite = async (req, res) => {
   const { teamId, email } = req.body;
   try {
     const team = await Team.findByPk(teamId);
@@ -49,8 +49,25 @@ const accept = async (req, res) => {
     if (!user) {
       return res.status(404).send("해당 사용자를 찾을 수 없습니다.");
     }
+
+    await team.addUser(user);
     res.status(200).send("초대가 수락되어 팀에 추가되었습니다.");
   } catch (error) {
     res.status(500).send("초대 수락 중 오류가 발생하였습니다.");
   }
 };
+
+const rejectInvite = async (req, res) => {
+  const { teamId, email } = req.body;
+  try {
+    res.status(200).send("초대가 거절되었습니다.");
+  } catch (error) {
+    res.status(500).send("초대 거절 중 오류가 발생하였습니다.");
+  }
+};
+
+module.exports = {
+  inviteMember,
+  acceptInvite,
+  rejectInvite
+}
